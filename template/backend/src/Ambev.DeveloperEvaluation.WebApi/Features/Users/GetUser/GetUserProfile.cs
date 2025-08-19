@@ -7,17 +7,17 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
 /// <summary>
 /// Profile for mapping GetUser feature requests to commands
 /// </summary>
-public class GetUserProfile : Profile
+public class GetSaleProfile : Profile
 {
     /// <summary>
     /// Initializes the mappings for GetUser feature
     /// </summary>
-    public GetUserProfile()
+    public GetSaleProfile()
     {
-        CreateMap<Guid, Application.Users.GetUser.GetUserCommand>()
+        CreateMap<Guid, Application.Users.GetUser.GetSaleCommand>()
             .ConstructUsing(id => new Application.Users.GetUser.GetUserCommand(id));
 
-        CreateMap<GetUserResult, GetUserResponse>();
+        CreateMap<GetSaleResult, GetSaleResponse>();
             
 
     }

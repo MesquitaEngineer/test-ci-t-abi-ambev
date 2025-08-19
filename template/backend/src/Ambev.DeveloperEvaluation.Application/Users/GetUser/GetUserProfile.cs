@@ -6,14 +6,14 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// <summary>
 /// Profile for mapping between User entity and GetUserResponse
 /// </summary>
-public class GetUserProfile : Profile
+public class GetSaleProfile : Profile
 {
     /// <summary>
     /// Initializes the mappings for GetUser operation
     /// </summary>
-    public GetUserProfile()
+    public GetSaleProfile()
     {
-        CreateMap<User, GetUserResult>()
+        CreateMap<User, GetSaleResult>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Username));
     }
 }

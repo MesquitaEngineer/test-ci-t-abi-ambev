@@ -7,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 /// <summary>
 /// Validator for CreateUserCommand that defines validation rules for user creation command.
 /// </summary>
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class CreateUserCommandValidator : AbstractValidator<CreateSaleCommand>
 {
     /// <summary>
     /// Initializes a new instance of the CreateUserCommandValidator with defined validation rules.

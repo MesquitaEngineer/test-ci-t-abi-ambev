@@ -1,39 +1,39 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
-/// API response model for GetUser operation
+/// API response model for CreateSale operation
 /// </summary>
-public class GetSaleResponse
+public class CreateSaleResponse
 {
     /// <summary>
-    /// The unique identifier of the user
+    /// The unique identifier of the created Sale
     /// </summary>
     public Guid Id { get; set; }
 
     /// <summary>
-    /// The user's full name
+    /// The Sale's full name
     /// </summary>
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// The user's email address
+    /// The Sale's email address
     /// </summary>
     public string Email { get; set; } = string.Empty;
 
     /// <summary>
-    /// The user's phone number
+    /// The Sale's phone number
     /// </summary>
     public string Phone { get; set; } = string.Empty;
 
     /// <summary>
-    /// The user's role in the system
+    /// The Sale's role in the system
     /// </summary>
-    public UserRole Role { get; set; }
+    public SaleRole Role { get; set; }
 
     /// <summary>
-    /// The current status of the user
+    /// The current status of the Sale
     /// </summary>
-    public UserStatus Status { get; set; }
+    public SaleStatus Status { get; set; }
 }

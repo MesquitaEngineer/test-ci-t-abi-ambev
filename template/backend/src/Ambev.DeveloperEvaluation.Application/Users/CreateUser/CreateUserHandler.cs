@@ -10,7 +10,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 /// <summary>
 /// Handler for processing CreateUserCommand requests
 /// </summary>
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserResult>
+public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleResult>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for CreateUserCommand</param>
-    public CreateUserHandler(IUserRepository userRepository, IMapper mapper, IPasswordHasher passwordHasher)
+    public CreateSaleHandler(IUserRepository userRepository, IMapper mapper, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -35,7 +35,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
     /// <param name="command">The CreateUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user details</returns>
-    public async Task<CreateUserResult> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+    public async Task<CreateSaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
     {
         var validator = new CreateUserCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
@@ -51,7 +51,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
         user.Password = _passwordHasher.HashPassword(command.Password);
 
         var createdUser = await _userRepository.CreateAsync(user, cancellationToken);
-        var result = _mapper.Map<CreateUserResult>(createdUser);
+        var result = _mapper.Map<CreateSaleResult>(createdUser);
         return result;
     }
 }

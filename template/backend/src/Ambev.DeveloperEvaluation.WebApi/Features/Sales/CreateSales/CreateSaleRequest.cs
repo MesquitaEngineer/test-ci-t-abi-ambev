@@ -1,16 +1,16 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
-/// Represents a request to create a new user in the system.
+/// Represents a request to create a new Sale in the system.
 /// </summary>
 public class CreateSaleRequest
 {
     /// <summary>
-    /// Gets or sets the username. Must be unique and contain only valid characters.
+    /// Gets or sets the Salename. Must be unique and contain only valid characters.
     /// </summary>
-    public string Username { get; set; } = string.Empty;
+    public string Salename { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the password. Must meet security requirements.
@@ -28,12 +28,12 @@ public class CreateSaleRequest
     public string Email { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the initial status of the user account.
+    /// Gets or sets the initial status of the Sale account.
     /// </summary>
-    public UserStatus Status { get; set; }
+    public SaleStatus Status { get; set; }
 
     /// <summary>
-    /// Gets or sets the role assigned to the user.
+    /// Gets or sets the role assigned to the Sale.
     /// </summary>
-    public UserRole Role { get; set; }
+    public SaleRole Role { get; set; }
 }

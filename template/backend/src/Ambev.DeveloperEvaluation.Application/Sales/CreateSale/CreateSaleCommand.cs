@@ -2,58 +2,58 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
-/// Command for creating a new user.
+/// Command for creating a new Sale.
 /// </summary>
 /// <remarks>
-/// This command is used to capture the required data for creating a user, 
-/// including username, password, phone number, email, status, and role. 
+/// This command is used to capture the required data for creating a Sale, 
+/// including Salename, password, phone number, email, status, and role. 
 /// It implements <see cref="IRequest{TResponse}"/> to initiate the request 
 /// that returns a <see cref="CreateSaleResult"/>.
 /// 
 /// The data provided in this command is validated using the 
-/// <see cref="CreateUserCommandValidator"/> which extends 
+/// <see cref="CreateSaleCommandValidator"/> which extends 
 /// <see cref="AbstractValidator{T}"/> to ensure that the fields are correctly 
 /// populated and follow the required rules.
 /// </remarks>
 public class CreateSaleCommand : IRequest<CreateSaleResult>
 {
     /// <summary>
-    /// Gets or sets the username of the user to be created.
+    /// Gets or sets the Salename of the Sale to be created.
     /// </summary>
-    public string Username { get; set; } = string.Empty;
+    public string Salename { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the password for the user.
+    /// Gets or sets the password for the Sale.
     /// </summary>
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the phone number for the user.
+    /// Gets or sets the phone number for the Sale.
     /// </summary>
     public string Phone { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the email address for the user.
+    /// Gets or sets the email address for the Sale.
     /// </summary>
     public string Email { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the status of the user.
+    /// Gets or sets the status of the Sale.
     /// </summary>
-    public UserStatus Status { get; set; }
+    public SaleStatus Status { get; set; }
 
     /// <summary>
-    /// Gets or sets the role of the user.
+    /// Gets or sets the role of the Sale.
     /// </summary>
-    public UserRole Role { get; set; }
+    public SaleRole Role { get; set; }
 
 
     public ValidationResultDetail Validate()
     {
-        var validator = new CreateUserCommandValidator();
+        var validator = new CreateSaleCommandValidator();
         var result = validator.Validate(this);
         return new ValidationResultDetail
         {
