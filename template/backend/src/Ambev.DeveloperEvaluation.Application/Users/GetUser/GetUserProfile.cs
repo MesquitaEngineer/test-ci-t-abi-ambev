@@ -14,6 +14,6 @@ public class GetUserProfile : Profile
     public GetUserProfile()
     {
         CreateMap<User, GetUserResult>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>fsrirst.Username));
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Username));
     }
 }

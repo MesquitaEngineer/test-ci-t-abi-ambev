@@ -9,6 +9,7 @@ using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Threading;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
 
@@ -35,6 +36,7 @@ public class Program
                     b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
                 )
             );
+            
 
             builder.Services.AddJwtAuthentication(builder.Configuration);
 
@@ -53,6 +55,14 @@ public class Program
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<DefaultContext>();
+                if(db.Database.GetMigrations().Any())
+                {
+                    db.Database.Migrate();
+                }
+            }
             app.UseMiddleware<ValidationExceptionMiddleware>();
 
             if (app.Environment.IsDevelopment())
