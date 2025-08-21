@@ -1,15 +1,16 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
 /// <summary>
-/// Response model for GetSale operation
+/// API response model for GetSale operation
 /// </summary>
-public class GetSaleResult
+public class GetSaleResponse
 {
     /// <summary>
     /// The unique identifier of the Sale
     /// </summary>
     public Guid Id { get; set; }
 
+    
 }

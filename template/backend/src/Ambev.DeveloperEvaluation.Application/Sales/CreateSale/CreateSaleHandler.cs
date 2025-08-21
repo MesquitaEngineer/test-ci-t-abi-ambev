@@ -4,6 +4,7 @@ using FluentValidation;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Common.Security;
+using Ambev.DeveloperEvaluation.Domain.Services;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
@@ -12,29 +13,15 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 /// </summary>
 public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleResult>
 {
-    private readonly ISaleRepository _SaleRepository;
+    private readonly ISaleService _saleService;
     private readonly IMapper _mapper;
-    private readonly IPasswordHasher _passwordHasher;
 
-    /// <summary>
-    /// Initializes a new instance of CreateSaleHandler
-    /// </summary>
-    /// <param name="SaleRepository">The Sale repository</param>
-    /// <param name="mapper">The AutoMapper instance</param>
-    /// <param name="validator">The validator for CreateSaleCommand</param>
-    public CreateSaleHandler(ISaleRepository SaleRepository, IMapper mapper, IPasswordHasher passwordHasher)
+    public CreateSaleHandler(ISaleService saleService, IMapper mapper)
     {
-        _SaleRepository = SaleRepository;
+        _saleService = saleService;
         _mapper = mapper;
-        _passwordHasher = passwordHasher;
     }
 
-    /// <summary>
-    /// Handles the CreateSaleCommand request
-    /// </summary>
-    /// <param name="command">The CreateSale command</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created Sale details</returns>
     public async Task<CreateSaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
     {
         var validator = new CreateSaleCommandValidator();
@@ -43,15 +30,11 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var existingSale = await _SaleRepository.GetByEmailAsync(command.Email, cancellationToken);
-        if (existingSale != null)
-            throw new InvalidOperationException($"Sale with email {command.Email} already exists");
+        var sale = _mapper.Map<Sale>(command);
+        
 
-        var Sale = _mapper.Map<Sale>(command);
-        Sale.Password = _passwordHasher.HashPassword(command.Password);
-
-        var createdSale = await _SaleRepository.CreateAsync(Sale, cancellationToken);
-        var result = _mapper.Map<CreateSaleResult>(createdSale);
-        return result;
+        var result = await _saleService.CreateSaleAsync(sale, cancellationToken);
+        return _mapper.Map<CreateSaleResult>(result);
     }
 }
+

@@ -8,6 +8,6 @@ public class CreateUserRequestProfile : Profile
 {
     public CreateUserRequestProfile()
     {
-        CreateMap<CreateSaleRequest, CreateSaleCommand>();
+        CreateMap<CreateUserRequest, CreateUserCommand>();
     }
 }

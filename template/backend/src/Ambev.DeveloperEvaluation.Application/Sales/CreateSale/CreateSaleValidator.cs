@@ -23,11 +23,12 @@ public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
     /// </remarks>
     public CreateSaleCommandValidator()
     {
-        RuleFor(Sale => Sale.Email).SetValidator(new EmailValidator());
-        RuleFor(Sale => Sale.Salename).NotEmpty().Length(3, 50);
-        RuleFor(Sale => Sale.Password).SetValidator(new PasswordValidator());
-        RuleFor(Sale => Sale.Phone).Matches(@"^\+?[1-9]\d{1,14}$");
-        RuleFor(Sale => Sale.Status).NotEqual(SaleStatus.Unknown);
-        RuleFor(Sale => Sale.Role).NotEqual(SaleRole.None);
+        RuleFor(s => s.SaleNumber).NotEmpty();
+        RuleFor(s => s.Date).NotEmpty();
+        RuleFor(s => s.Customer).NotEmpty();
+        RuleFor(s => s.Branch).NotEmpty();
+        RuleFor(s => s.Items).NotEmpty();
+
+        RuleForEach(s => s.Items).SetValidator(new CreateSaleItemCommandValidator());
     }
 }

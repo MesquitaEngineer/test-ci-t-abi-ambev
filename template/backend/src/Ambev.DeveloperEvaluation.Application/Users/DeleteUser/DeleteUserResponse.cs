@@ -3,7 +3,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 /// <summary>
 /// Response model for DeleteUser operation
 /// </summary>
-public class DeleteSaleResponse
+public class DeleteUserResponse
 {
     /// <summary>
     /// Indicates whether the deletion was successful

@@ -8,7 +8,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// <summary>
 /// Handler for processing GetUserCommand requests
 /// </summary>
-public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
+public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetUserCommand</param>
-    public GetSaleHandler(
+    public GetUserHandler(
         IUserRepository userRepository,
         IMapper mapper)
     {
@@ -33,7 +33,7 @@ public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
     /// <param name="request">The GetUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user details if found</returns>
-    public async Task<GetSaleResult> Handle(GetSaleCommand request, CancellationToken cancellationToken)
+    public async Task<GetUserResult> Handle(GetUserCommand request, CancellationToken cancellationToken)
     {
         var validator = new GetUserValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -45,6 +45,6 @@ public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
         if (user == null)
             throw new KeyNotFoundException($"User with ID {request.Id} not found");
 
-        return _mapper.Map<GetSaleResult>(user);
+        return _mapper.Map<GetUserResult>(user);
     }
 }

@@ -3,7 +3,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser;
 /// <summary>
 /// Request model for deleting a user
 /// </summary>
-public class DeleteSaleRequest
+public class DeleteUserRequest
 {
     /// <summary>
     /// The unique identifier of the user to delete

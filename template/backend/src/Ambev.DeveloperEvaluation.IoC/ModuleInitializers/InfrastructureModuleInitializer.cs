@@ -1,6 +1,8 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Services;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
+using Ambev.DeveloperEvaluation.ORM.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,5 +16,10 @@ public class InfrastructureModuleInitializer : IModuleInitializer
     {
         builder.Services.AddScoped<DbContext>(provider => provider.GetRequiredService<DefaultContext>());
         builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+
+        builder.Services.AddScoped<ISaleService, SaleService>();
+
+
     }
 }

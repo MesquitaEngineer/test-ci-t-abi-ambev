@@ -13,7 +13,7 @@ public class CreateUserProfile : Profile
     /// </summary>
     public CreateUserProfile()
     {
-        CreateMap<CreateSaleRequest, CreateSaleCommand>();
-        CreateMap<CreateSaleResult, CreateSaleResponse>();
+        CreateMap<CreateUserRequest, CreateUserCommand>();
+        CreateMap<CreateUserResult, CreateUserResponse>();
     }
 }

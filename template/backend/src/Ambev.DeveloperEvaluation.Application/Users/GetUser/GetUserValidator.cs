@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// <summary>
 /// Validator for GetUserCommand
 /// </summary>
-public class GetUserValidator : AbstractValidator<GetSaleCommand>
+public class GetUserValidator : AbstractValidator<GetUserCommand>
 {
     /// <summary>
     /// Initializes validation rules for GetUserCommand

@@ -7,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 /// <summary>
 /// Handler for processing DeleteUserCommand requests
 /// </summary>
-public class DeleteSaleHandler : IRequestHandler<DeleteUserCommand, DeleteSaleResponse>
+public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserResponse>
 {
     private readonly IUserRepository _userRepository;
 
@@ -16,7 +16,7 @@ public class DeleteSaleHandler : IRequestHandler<DeleteUserCommand, DeleteSaleRe
     /// </summary>
     /// <param name="userRepository">The user repository</param>
     /// <param name="validator">The validator for DeleteUserCommand</param>
-    public DeleteSaleHandler(
+    public DeleteUserHandler(
         IUserRepository userRepository)
     {
         _userRepository = userRepository;
@@ -28,7 +28,7 @@ public class DeleteSaleHandler : IRequestHandler<DeleteUserCommand, DeleteSaleRe
     /// <param name="request">The DeleteUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The result of the delete operation</returns>
-    public async Task<DeleteSaleResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task<DeleteUserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         var validator = new DeleteUserValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -40,6 +40,6 @@ public class DeleteSaleHandler : IRequestHandler<DeleteUserCommand, DeleteSaleRe
         if (!success)
             throw new KeyNotFoundException($"User with ID {request.Id} not found");
 
-        return new DeleteSaleResponse { Success = true };
+        return new DeleteUserResponse { Success = true };
     }
 }

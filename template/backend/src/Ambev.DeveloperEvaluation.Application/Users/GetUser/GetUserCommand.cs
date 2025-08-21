@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// <summary>
 /// Command for retrieving a user by their ID
 /// </summary>
-public record GetSaleCommand : IRequest<GetSaleResult>
+public record GetUserCommand : IRequest<GetUserResult>
 {
     /// <summary>
     /// The unique identifier of the user to retrieve
@@ -16,7 +16,7 @@ public record GetSaleCommand : IRequest<GetSaleResult>
     /// Initializes a new instance of GetUserCommand
     /// </summary>
     /// <param name="id">The ID of the user to retrieve</param>
-    public GetSaleCommand(Guid id)
+    public GetUserCommand(Guid id)
     {
         Id = id;
     }

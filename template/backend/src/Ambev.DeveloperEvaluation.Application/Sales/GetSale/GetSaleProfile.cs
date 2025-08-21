@@ -13,7 +13,6 @@ public class GetSaleProfile : Profile
     /// </summary>
     public GetSaleProfile()
     {
-        CreateMap<Sale, GetSaleResult>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Salename));
+        CreateMap<Sale, GetSaleResult>();
     }
 }
