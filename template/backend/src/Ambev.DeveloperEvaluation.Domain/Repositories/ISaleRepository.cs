@@ -24,6 +24,14 @@ public interface ISaleRepository
     Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Retrieves any Sales by  identifier
+    /// </summary>
+    /// <param name="saleNumber">A identifier of the Sales</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The Sales if found, null otherwise</returns>
+    Task<List<Sale>?> GetBySaleNumberAsync(string saleNumber, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Deletes a Sale from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the Sale to delete</param>

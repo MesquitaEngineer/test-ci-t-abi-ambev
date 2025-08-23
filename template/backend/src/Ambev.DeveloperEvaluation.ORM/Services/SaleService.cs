@@ -13,36 +13,23 @@ public class SaleService : ISaleService
         _saleRepository = saleRepository;
     }
 
-    public async Task<Sale> CreateSaleAsync(Sale command, CancellationToken cancellationToken)
+    public async Task<Sale> CreateSaleAsync(Sale sale, CancellationToken cancellationToken)
     {
-        var sale = new Sale
-        {
-            Id = Guid.NewGuid(),
-            SaleNumber = command.SaleNumber,
-            Date = command.Date,
-            Customer = command.Customer,
-            Branch = command.Branch,
-            Items = new List<SaleItem>()
-        };
+
+        var sales = await _saleRepository.GetBySaleNumberAsync(sale.SaleNumber, cancellationToken);
+
+        if (sales != null && sales.Any())
+            throw new ArgumentException("Existe vendas com esse número.");
 
         decimal totalAmount = 0;
 
-        foreach (var item in command.Items)
+        foreach (var item in sale.Items)
         {
             var discount = this.CalculateDiscount(item.Quantity, item.UnitPrice);
             var total = item.UnitPrice * item.Quantity - discount;
-
-            sale.Items.Add(new SaleItem
-            {
-                Id = Guid.NewGuid(),
-                Product = item.Product,
-                Quantity = item.Quantity,
-                UnitPrice = item.UnitPrice,
-                Discount = discount,
-                Total = total,
-                SaleId = sale.Id
-            });
-
+            item.Discount = discount;
+            item.Total = total;
+            
             totalAmount += total;
         }
 

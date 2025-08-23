@@ -45,6 +45,19 @@ public class SaleRepository : ISaleRepository
     }
 
     /// <summary>
+    /// Retrieves any Sales by  identifier
+    /// </summary>
+    /// <param name="saleNumber">A identifier of the Sales</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The Sales if found, null otherwise</returns>
+    public async Task<List<Sale>?> GetBySaleNumberAsync(string saleNumber, CancellationToken cancellationToken = default)
+    {
+        return await _context.Sales
+         .Where(o => o.SaleNumber == saleNumber)
+         .ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
     /// Deletes a Sale from the database
     /// </summary>
     /// <param name="id">The unique identifier of the Sale to delete</param>
