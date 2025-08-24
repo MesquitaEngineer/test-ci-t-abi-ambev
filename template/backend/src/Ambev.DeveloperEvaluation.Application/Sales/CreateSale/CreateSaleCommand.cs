@@ -20,10 +20,10 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 /// </remarks>
 public class CreateSaleCommand : IRequest<CreateSaleResult>
 {
-    public string SaleNumber { get; set; }
+    public string? SaleNumber { get; set; }
     public DateTime Date { get; set; }
-    public string Customer { get; set; }
-    public string Branch { get; set; }
+    public string? Customer { get; set; }
+    public string? Branch { get; set; }
     public List<CreateSaleItemCommand> Items { get; set; } = new();
 
 

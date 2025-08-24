@@ -1,11 +1,11 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.ListSale;
 
 /// <summary>
-/// API response model for GetSale operation
+/// API response model for ListSale operation
 /// </summary>
-public class GetSaleResponse
+public class ListSaleResponse
 {
     /// <summary>
     /// Gets or sets the unique identifier of the sale.
@@ -46,6 +46,5 @@ public class GetSaleResponse
     /// <summary>
     /// Gets or sets the collection of items included in the sale.
     /// </summary>
-
 
 }

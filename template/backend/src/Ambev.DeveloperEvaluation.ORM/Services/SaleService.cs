@@ -2,6 +2,8 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Services;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Services;
 public class SaleService : ISaleService
@@ -16,7 +18,7 @@ public class SaleService : ISaleService
     public async Task<Sale> CreateSaleAsync(Sale sale, CancellationToken cancellationToken)
     {
 
-        var sales = await _saleRepository.GetBySaleNumberAsync(sale.SaleNumber, cancellationToken);
+        var sales = await _saleRepository.GetBySaleNumberAsync(sale.SaleNumber!, cancellationToken);
 
         if (sales != null && sales.Any())
             throw new ArgumentException("Existe vendas com esse número.");
@@ -29,13 +31,13 @@ public class SaleService : ISaleService
             var total = item.UnitPrice * item.Quantity - discount;
             item.Discount = discount;
             item.Total = total;
-            
+
             totalAmount += total;
         }
 
         sale.TotalAmount = totalAmount;
 
-        await _saleRepository.CreateAsync(sale, cancellationToken);
+        await _saleRepository.AddAsync(sale, cancellationToken);
         return sale;
     }
 

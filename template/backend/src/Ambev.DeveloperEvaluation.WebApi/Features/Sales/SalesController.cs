@@ -8,6 +8,8 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.ListSale;
+using Ambev.DeveloperEvaluation.Application.Sales.ListSale;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
@@ -31,6 +33,38 @@ public class SalesController : BaseController
         _mediator = mediator;
         _mapper = mapper;
     }
+
+
+    /// <summary>
+    /// Retrieves sales filtered by any combination of Sale fields
+    /// </summary>
+    /// <param name="request">Search filters for Sale</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Filtered list of sales</returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(ApiResponseWithData<List<GetSaleResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SearchSales([FromQuery] ListSaleRequest request, CancellationToken cancellationToken)
+    {
+        var validator = new ListSaleRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = _mapper.Map<ListSaleCommand>(request);
+        var result = await _mediator.Send(command, cancellationToken);
+
+        var response = _mapper.Map<IList<ListSaleResponse>>(result);
+
+        return Ok(new ApiResponseWithData<IList<ListSaleResponse>>
+        {
+            Success = true,
+            Message = "Sales retrieved successfully",
+            Data = response
+        });
+    }
+
 
     /// <summary>
     /// Creates a new Sale

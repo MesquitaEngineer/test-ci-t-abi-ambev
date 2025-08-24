@@ -13,15 +13,11 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities;
 /// </summary>
 public class SaleItem : BaseEntity
 {
-    /// <summary>
-    /// Gets or sets the unique identifier of the sale item.
-    /// </summary>
-    public Guid Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the product associated with this sale item.
     /// </summary>
-    public string Product { get; set; }
+    public string? Product { get; set; }
 
     /// <summary>
     /// Gets or sets the quantity of the product sold.
@@ -56,5 +52,5 @@ public class SaleItem : BaseEntity
     /// <summary>
     /// Gets or sets the sale transaction to which this item belongs.
     /// </summary>
-    public Sale Sale { get; set; }
+    public Sale? Sale { get; set; }
 }

@@ -20,7 +20,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 /// </remarks>
 public class CreateSaleItemCommand : IRequest<CreateSaleItemResult>
 {
-    public string Product { get; set; }
+    public string? Product { get; set; }
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
 

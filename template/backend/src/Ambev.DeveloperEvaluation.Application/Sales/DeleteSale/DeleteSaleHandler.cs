@@ -15,7 +15,6 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
     /// Initializes a new instance of DeleteSaleHandler
     /// </summary>
     /// <param name="SaleRepository">The Sale repository</param>
-    /// <param name="validator">The validator for DeleteSaleCommand</param>
     public DeleteSaleHandler(
         ISaleRepository SaleRepository)
     {
@@ -36,9 +35,12 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var success = await _SaleRepository.DeleteAsync(request.Id, cancellationToken);
-        if (!success)
+        var sale = await _SaleRepository.GetByIdAsync(request.Id, cancellationToken);
+
+        if (sale == null)
             throw new KeyNotFoundException($"Sale with ID {request.Id} not found");
+
+        await _SaleRepository.DeleteAsync(sale, cancellationToken);
 
         return new DeleteSaleResponse { Success = true };
     }
