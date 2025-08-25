@@ -1,3 +1,8 @@
+DEBUG PELO VISUA STUDIO ESCOLHENDO A OPÇÃO DOCKER-COMPOSE.
+
+
+
+
 # Developer Evaluation Project
 
 `READ CAREFULLY`
@@ -18,17 +23,19 @@ As we work with `DDD`, to reference entities from other domains, we use the `Ext
 
 Therefore, you will write an API (complete CRUD) that handles sales records. The API needs to be able to inform:
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
+FIZ POR ENQUANTO CREATE E LIST ALL
+
+* Sale number OK
+* Date when the sale was made OK
+* Customer OK
+* Total sale amount OK
+* Branch where the sale was made OK
+* Products OK
+* Quantities OK
+* Unit prices OK
+* Discounts OK
+* Total amount for each item OK
+* Cancelled/Not Cancelled OK
 
 It's not mandatory, but it would be a differential to build code for publishing events of:
 * SaleCreated
@@ -48,12 +55,12 @@ If you write the code, **it's not required** to actually publish to any Message 
 These business rules define quantity-based discounting tiers and limitations:
 
 1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
+   - 4+ items: 10% discount OK
+   - 10-20 items: 20% discount OK
 
 2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+   - Maximum limit: 20 items per product OK
+   - No discounts allowed for quantities below 4 items OK
 
 ## Overview
 This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
